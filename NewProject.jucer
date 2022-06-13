@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="AWnjSO" name="SynthPlayground" projectType="audioplug" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
+              companyName="VanKhulup" pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn"
+              cppLanguageStandard="latest">
+  <MAINGROUP id="Ahm365" name="SynthPlayground">
+    <GROUP id="{1938F799-6429-0D1D-1218-4EABF666CA23}" name="Source">
+      <GROUP id="{04535E3A-6B9B-4EB1-2B94-855C6045D38A}" name="UI">
+        <GROUP id="{D73874EA-5E00-B046-7B2C-FE3849FC56D6}" name="ADSR Visualizer">
+          <FILE id="MqFl0q" name="ADSRVisualiserComponent.cpp" compile="1" resource="0"
+                file="Source/ADSRVisualiserComponent.cpp"/>
+          <FILE id="ScOWCC" name="ADSRVisualiserComponent.h" compile="0" resource="0"
+                file="Source/ADSRVisualiserComponent.h"/>
+          <FILE id="GsOhZp" name="ADSRVisualizerSlider.cpp" compile="1" resource="0"
+                file="Source/ADSRVisualizerSlider.cpp"/>
+          <FILE id="Wapr0H" name="ADSRVisualizerSlider.h" compile="0" resource="0"
+                file="Source/ADSRVisualizerSlider.h"/>
+          <FILE id="e45D0M" name="ADSRVisualizerSliderLaF.h" compile="0" resource="0"
+                file="Source/ADSRVisualizerSliderLaF.h"/>
+        </GROUP>
+        <FILE id="Vbt1dW" name="MainLayoutDrawer.cpp" compile="1" resource="0"
+              file="Source/MainLayoutDrawer.cpp"/>
+        <FILE id="BppS4T" name="MainLayoutDrawer.h" compile="0" resource="0"
+              file="Source/MainLayoutDrawer.h"/>
+        <FILE id="H1upM3" name="UIEventsListener.h" compile="0" resource="0"
+              file="Source/UIEventsListener.h"/>
+        <FILE id="B8oKZE" name="WaveSelectionButtonLaF.h" compile="0" resource="0"
+              file="Source/WaveSelectionButtonLaF.h"/>
+      </GROUP>
+      <GROUP id="{1908FE5F-0DB4-1390-DF12-8F69EEF4E19E}" name="SynthVoice">
+        <FILE id="wWMFdr" name="OscSound.h" compile="0" resource="0" file="Source/OscSound.h"/>
+        <FILE id="ocaznB" name="OscVoice.cpp" compile="1" resource="0" file="Source/OscVoice.cpp"/>
+        <FILE id="gJVSBc" name="OscVoice.h" compile="0" resource="0" file="Source/OscVoice.h"/>
+        <FILE id="bXo5rq" name="Waveforms.h" compile="0" resource="0" file="Source/Waveforms.h"/>
+      </GROUP>
+      <FILE id="EqZksR" name="SynthParameters.h" compile="0" resource="0"
+            file="Source/SynthParameters.h"/>
+      <FILE id="CUDI9I" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="jGASah" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="iPTqUm" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="eHGwaj" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="NewProject"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="NewProject"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../../JUCE/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+</JUCERPROJECT>
