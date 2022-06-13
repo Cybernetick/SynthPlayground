@@ -12,13 +12,10 @@
 
 ADSRVisualiserComponent::ADSRVisualiserComponent()
 {
-    attack_slider.setRange(0.1, 5.0);
     attack_slider.setValue(attack_value);
-    attack_slider.setSliderStyle(Slider::SliderStyle::LinearVertical);
-    attack_slider.setLookAndFeel(new ADSRVisualizerSliderLaF());
-    
     decay_slider.setValue(decay_value);
-    decay_slider.setSliderStyle(Slider::SliderStyle::LinearVertical);
+    sustain_slider.setValue(sustain_value);
+    release_slider.setValue(release_value);
     
     addAndMakeVisible(&attack_slider);
     addAndMakeVisible(&decay_slider);
@@ -42,20 +39,28 @@ void ADSRVisualiserComponent::resized()
 void ADSRVisualiserComponent::paint(Graphics &graphics)
 {
     auto bounds = getLocalBounds().toType<float>();
-    graphics.setColour(Colours::dimgrey.darker(0.3f));
+    graphics.setColour(Colours::darkblue.darker(0.3f));
     graphics.fillRoundedRectangle(bounds, 3.0f);
-    
-    graphics.setColour(Colours::aquamarine.withAlpha(0.2f));
-    for (int i = 1; i <= 10; ++i) {
-        auto y = bounds.getHeight() * (0.1f * i);
-        graphics.drawLine(0, y , bounds.getWidth(), y);
-        
-        auto x = bounds.getWidth() * (0.1f * i);
-        graphics.drawLine(x, 0, x, bounds.getHeight());
-    }
-    drawADSRPoints(graphics);
+    drawVisualizerPath(graphics);
 }
 
-void ADSRVisualiserComponent::drawADSRPoints(Graphics& graphics)
+void ADSRVisualiserComponent::drawVisualizerPath(Graphics& graphics)
 {
+    auto bounds = getLocalBounds();
+    envelopeVisualizerPath.clear();
+    envelopeVisualizerPath.startNewSubPath(0.0, bounds.getHeight());
+    auto attackPosition = attack_slider.getCurrentThumbPosition();
+    envelopeVisualizerPath.lineTo(attack_slider.getBounds().getCentreX(), attackPosition);
+    graphics.setColour(attack_slider.findColour(juce::Slider::thumbColourId));
+    graphics.strokePath(envelopeVisualizerPath, PathStrokeType(1.0f));
+    
+    auto decay = decay_slider.getCurrentThumbPosition();
+    envelopeVisualizerPath.lineTo(decay_slider.getBounds().getCentreX(), decay);
+    auto sustain = sustain_slider.getCurrentThumbPosition();
+    envelopeVisualizerPath.lineTo(sustain_slider.getBounds().getCentreX(), sustain);
+    auto release = release_slider.getCurrentThumbPosition();
+    envelopeVisualizerPath.lineTo(release_slider.getBounds().getCentreX(), release);
+    envelopeVisualizerPath.lineTo(bounds.getWidth(), bounds.getHeight());
+    
+    graphics.strokePath(envelopeVisualizerPath, PathStrokeType(1.0f));
 }

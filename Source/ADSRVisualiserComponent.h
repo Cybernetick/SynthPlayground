@@ -24,11 +24,12 @@ class ADSRVisualiserComponent: public juce::Component, public juce::AudioProcess
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(ADSRVisualiserComponent);
     
     ADSRVisualizerSlider attack_slider { };
-    Slider decay_slider { };
-    Slider sustain_slider { };
-    Slider release_slider { };
-    void drawADSRPoints(Graphics& graphics);
+    ADSRVisualizerSlider decay_slider { };
+    ADSRVisualizerSlider sustain_slider { };
+    ADSRVisualizerSlider release_slider { };
+    void drawVisualizerPath(Graphics& graphics);
     
+    Path envelopeVisualizerPath {};
 public:
     ADSRVisualiserComponent();
     void parameterChanged(const String& parameterID, float newValue) override;

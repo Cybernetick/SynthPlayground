@@ -11,6 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "ADSRVisualizerSliderLaF.h"
 
 class ADSRVisualizerSlider: public juce::Slider
 {
@@ -19,4 +20,6 @@ public:
     
     void mouseEnter(const juce::MouseEvent& event) override;
     void mouseExit(const juce::MouseEvent& event) override;
+    
+    float getCurrentThumbPosition();
 };

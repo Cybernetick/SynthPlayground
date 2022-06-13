@@ -11,7 +11,7 @@
 #include "MainLayoutDrawer.h"
 
 MainLayoutDrawer::MainLayoutDrawer(int numChannels): audioVisualiserComponent(numChannels) {
-    audioVisualiserComponent.setColours(juce::Colours::transparentWhite, juce::Colours::aquamarine);
+    audioVisualiserComponent.setColours(juce::Colours::darkblue, juce::Colours::aquamarine);
     audioVisualiserComponent.setRepaintRate(24);
     audioVisualiserComponent.setSamplesPerBlock(16);
     components.insert(components.begin(), &audioVisualiserComponent);
@@ -65,7 +65,7 @@ void MainLayoutDrawer::drawWaveformContainer(juce::Graphics &graphicContext)
 {
     float waveformAreaHeight = height * 0.5;
     audioVisualiserComponent.setBounds(0, waveformAreaHeight, width, height);
-    graphicContext.setColour(juce::Colours::black);
+//    graphicContext.setColour(juce::Colours::black);
     auto rect = juce::Rectangle<float>(0.0, waveformAreaHeight, width, height);
     drawWaveform(graphicContext, rect);
 }
@@ -109,5 +109,5 @@ void MainLayoutDrawer::clean()
 
 void MainLayoutDrawer::drawADSRComponent(juce::Graphics &graphicContext)
 {
-    adsrVisualiserComponent.setBounds(200, 100, 200, 100);
+    adsrVisualiserComponent.setBounds(200, 10, 200, 100);
 }

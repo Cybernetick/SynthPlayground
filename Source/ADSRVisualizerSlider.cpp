@@ -13,11 +13,11 @@
 ADSRVisualizerSlider::ADSRVisualizerSlider()
 {
     setColour(juce::Slider::trackColourId, juce::Colours::green);
-    setColour(juce::Slider::thumbColourId, juce::Colours::red);
+    setColour(juce::Slider::thumbColourId, juce::Colours::aquamarine);
     setSliderSnapsToMousePosition(false);
-    onValueChange = [&](){
-        std::cout << "value changed: " << getValue() << std::endl;
-    };
+    setLookAndFeel(new ADSRVisualizerSliderLaF());
+    setSliderStyle(SliderStyle::LinearVertical);
+    setRange(0.1, 5.0);
 }
 
 void ADSRVisualizerSlider::mouseExit(const juce::MouseEvent &event)
@@ -26,5 +26,11 @@ void ADSRVisualizerSlider::mouseExit(const juce::MouseEvent &event)
 
 void ADSRVisualizerSlider::mouseEnter(const juce::MouseEvent &event)
 {
+}
+
+float ADSRVisualizerSlider::getCurrentThumbPosition()
+{
+    auto position = getPositionOfValue(getValue());
+    return position;
 }
 
