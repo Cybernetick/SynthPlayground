@@ -39,7 +39,7 @@ private:
         spec.numChannels = numChannels;
         
         osc.prepare(spec);
-    };
+    }
     
     void initAdsrSpec(double sampleRate)
     {

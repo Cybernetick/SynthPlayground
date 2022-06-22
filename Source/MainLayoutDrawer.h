@@ -14,7 +14,8 @@
 #include "UIEventsListener.h"
 #include "ADSRVisualiserComponent.h"
 
-class MainLayoutDrawer : juce::Button::Listener {
+using namespace juce;
+class MainLayoutDrawer : Button::Listener {
 private:
     void drawBackground(juce::Graphics& graphicContext);
     void drawWaveSelectionContainer(juce::Graphics& graphicContext);
@@ -29,18 +30,18 @@ private:
     std::vector<juce::Component*> components;
     
     juce::AudioVisualiserComponent audioVisualiserComponent;
-    juce::ToggleButton sinWaveButton;
-    juce::ToggleButton squareWaveButton;
-    juce::ToggleButton sawToothWaveButton;
-    juce::ToggleButton triangleWaveButton;
+    ToggleButton sinWaveButton;
+    ToggleButton squareWaveButton;
+    ToggleButton sawToothWaveButton;
+    ToggleButton triangleWaveButton;
     ADSRVisualiserComponent adsrVisualiserComponent;
     
     juce::Button* currentSelection = nullptr;
     GUI::UIEventsListener* uiEventsListener = nullptr;
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainLayoutDrawer);
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainLayoutDrawer)
     
 public:
-    MainLayoutDrawer(int numChannels);
+    explicit MainLayoutDrawer(int numChannels);
     void redrawLayout(juce::Graphics& graphic);
     void onWindowResized(int newWidth, int newHeight);
     void pushBufferForVisualisation(juce::AudioBuffer<float>& buffer);

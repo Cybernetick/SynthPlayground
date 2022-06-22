@@ -44,8 +44,6 @@ void OscVoice::renderNextBlock(AudioBuffer<float> &outputBuffer, int startSample
 {
     voiceBuffer.setSize(outputBuffer.getNumChannels(), numSamples, false, false, true);
     voiceBuffer.clear();
-    
-    
     auto block = juce::dsp::AudioBlock<float> { voiceBuffer };
     osc.process(juce::dsp::ProcessContextReplacing<float>(block));
     adsr.applyEnvelopeToBuffer(voiceBuffer, 0, voiceBuffer.getNumSamples());

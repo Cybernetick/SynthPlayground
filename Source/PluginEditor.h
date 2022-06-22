@@ -19,7 +19,7 @@
 class NewProjectAudioProcessorEditor  : public juce::AudioProcessorEditor, public juce::Timer, public GUI::UIEventsListener
 {
 public:
-    NewProjectAudioProcessorEditor (NewProjectAudioProcessor&);
+    explicit NewProjectAudioProcessorEditor (NewProjectAudioProcessor&);
     ~NewProjectAudioProcessorEditor() override;
 
     //==============================================================================

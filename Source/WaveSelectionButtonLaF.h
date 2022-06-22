@@ -16,9 +16,9 @@ using namespace juce;
 struct WaveSelectionButtonLaF: public juce::LookAndFeel_V4 {
     
 public:
-    WaveSelectionButtonLaF(WaveForms form) : waveform { form }
+    explicit WaveSelectionButtonLaF(WaveForms form) : waveform { form }
     {
-    };
+    }
     
     const WaveForms waveform;
     
