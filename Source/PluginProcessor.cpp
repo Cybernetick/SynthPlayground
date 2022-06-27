@@ -139,6 +139,20 @@ void NewProjectAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
+    
+    auto attackParam = apvts.getRawParameterValue(Parameters::Ids::envelope_attack);
+    auto decayParam = apvts.getRawParameterValue(Parameters::Ids::envelope_decay);
+    auto sustainParam = apvts.getRawParameterValue(Parameters::Ids::envelope_sustain);
+    auto releaseParam = apvts.getRawParameterValue(Parameters::Ids::envelope_release);
+    
+    for (int i = 0; i < mySynthesiser.getNumVoices(); ++i)
+    {
+        auto voice = dynamic_cast<OscVoice*>(mySynthesiser.getVoice(i));
+        if (voice) {
+            voice->updateAdsrParameters(attackParam->load(), decayParam->load(), sustainParam->load(), releaseParam->load());
+        }
+        
+    }
     // In case we have more outputs than inputs, this code clears any output
     // channels that didn't contain input data, (because these aren't
     // guaranteed to be empty - they may contain garbage).
@@ -162,7 +176,7 @@ bool NewProjectAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* NewProjectAudioProcessor::createEditor()
 {
-    return new NewProjectAudioProcessorEditor (*this);
+    return new NewProjectAudioProcessorEditor (*this, apvts);
 }
 
 //==============================================================================

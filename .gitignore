@@ -1,2 +1,5 @@
 Builds
 JuceLibraryCode
+Source/cmake-build
+Source/cmake-build-debug
+Source/.idea

@@ -103,6 +103,13 @@ void MainLayoutDrawer::buttonClicked(juce::Button *clickedButton)
 
 void MainLayoutDrawer::clean()
 {
+    for (Component* component : components) {
+        auto laf = dynamic_cast<WaveSelectionButtonLaF*>(&component->getLookAndFeel());
+        if (laf) {
+            component->setLookAndFeel(nullptr);
+            delete laf;
+        }
+    }
     components.clear();
     uiEventsListener = nullptr;
 }

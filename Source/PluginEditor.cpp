@@ -10,7 +10,7 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor (NewProjectAudioProcessor& p)
+NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor (NewProjectAudioProcessor& p, juce::AudioProcessorValueTreeState& apvts)
     : AudioProcessorEditor (&p), audioProcessor (p), drawingDelegate(audioProcessor.getTotalNumOutputChannels())
 {
     // Make sure that before the constructor has finished, you've set the
@@ -22,6 +22,10 @@ NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor (NewProjectAudioP
     for (juce::Component* component: drawingDelegate.getComponents())
     {
         addAndMakeVisible(component);
+        auto adsrComponent = dynamic_cast<ADSRVisualiserComponent*>(component);
+        if (adsrComponent) {
+            adsrComponent->attachAPVTS(apvts);
+        }
     }
     startTimerHz(60);
     audioProcessor.apvts.addParameterListener(Parameters::Names::envelope_attack, drawingDelegate.getAudioParametersListener());

@@ -34,3 +34,8 @@ float ADSRVisualizerSlider::getCurrentThumbPosition()
     return position;
 }
 
+void ADSRVisualizerSlider::attachApvts(juce::AudioProcessorValueTreeState &apvts, const juce::String &parameterId)
+{
+    sliderAttachment = std::make_unique<SliderAttachement>(apvts, parameterId, *this);
+}
+

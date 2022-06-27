@@ -13,8 +13,11 @@
 #include <JuceHeader.h>
 #include "ADSRVisualizerSliderLaF.h"
 
+using SliderAttachement = juce::AudioProcessorValueTreeState::SliderAttachment;
+
 class ADSRVisualizerSlider: public juce::Slider
 {
+    std::unique_ptr<SliderAttachement> sliderAttachment;
 public:
     ADSRVisualizerSlider();
     
@@ -22,4 +25,5 @@ public:
     void mouseExit(const juce::MouseEvent& event) override;
     
     float getCurrentThumbPosition();
+    void attachApvts(juce::AudioProcessorValueTreeState& apvts, const juce::String& parameterId);
 };

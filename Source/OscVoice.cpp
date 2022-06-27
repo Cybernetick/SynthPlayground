@@ -15,6 +15,7 @@ using namespace juce;
 OscVoice::OscVoice()
 {
     osc.initialise([](float x) { return std::sin(x); });
+    adsr.setParameters(adsrParameters);
 }
 
 bool OscVoice::canPlaySound(SynthesiserSound *sound)
@@ -83,4 +84,13 @@ void OscVoice::initFilters(double sampleRate, int samplesPerBlock, int numChanne
 {
     initAdsrSpec(sampleRate);
     initOscilliatorSpec(sampleRate, samplesPerBlock, numChannels);
+}
+
+void OscVoice::updateAdsrParameters(float attack, float decay, float sustain, float release)
+{
+    adsrParameters.attack = attack;
+    adsrParameters.decay = decay;
+    adsrParameters.sustain = sustain;
+    adsrParameters.release = release;
+    adsr.setParameters(adsrParameters);
 }

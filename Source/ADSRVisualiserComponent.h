@@ -12,6 +12,7 @@
 #include <JuceHeader.h>
 #include "ADSRVisualizerSliderLaF.h"
 #include "ADSRVisualizerSlider.h"
+#include "SynthParameters.h"
 
 class ADSRVisualiserComponent: public juce::Component, public juce::AudioProcessorValueTreeState::Listener
 {
@@ -33,4 +34,6 @@ public:
     void parameterChanged(const String& parameterID, float newValue) override;
     void resized() override;
     void paint(Graphics& graphics) override;
+    void clean();
+    void attachAPVTS(juce::AudioProcessorValueTreeState&);
 };

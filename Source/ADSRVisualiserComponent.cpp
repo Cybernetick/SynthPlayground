@@ -64,3 +64,16 @@ void ADSRVisualiserComponent::drawVisualizerPath(Graphics& graphics)
     
     graphics.strokePath(envelopeVisualizerPath, PathStrokeType(1.0f));
 }
+
+void ADSRVisualiserComponent::clean() {
+    for (Component* child: getChildren()) {
+    }
+}
+
+void ADSRVisualiserComponent::attachAPVTS(juce::AudioProcessorValueTreeState& apvts)
+{
+    attack_slider.attachApvts(apvts, Parameters::Ids::envelope_attack);
+    decay_slider.attachApvts(apvts, Parameters::Ids::envelope_decay);
+    sustain_slider.attachApvts(apvts, Parameters::Ids::envelope_sustain);
+    release_slider.attachApvts(apvts, Parameters::Ids::envelope_release);
+}

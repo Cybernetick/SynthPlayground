@@ -24,10 +24,12 @@ public:
     void renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples) override;
     void initFilters(double sampleRate, int samplesPerBlock, int numChannels);
     void updateWaveForm(WaveForms waveform);
+    void updateAdsrParameters(float attack, float decay, float sustain, float release);
 private:
     juce::dsp::Oscillator<float> osc {};
     juce::AudioBuffer<float> voiceBuffer;
     juce::ADSR adsr {};
+    juce::ADSR::Parameters adsrParameters {};
     
     double tailOff { 0.0 };
     
