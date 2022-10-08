@@ -30,10 +30,16 @@ private:
     std::vector<juce::Component*> components;
     
     juce::AudioVisualiserComponent audioVisualiserComponent;
-    ToggleButton sinWaveButton;
-    ToggleButton squareWaveButton;
-    ToggleButton sawToothWaveButton;
-    ToggleButton triangleWaveButton;
+//    ToggleButton sinWaveButton;
+//    ToggleButton squareWaveButton;
+//    ToggleButton sawToothWaveButton;
+//    ToggleButton triangleWaveButton;
+
+    std::unique_ptr<WaveSelectionButtonLaF> sinWaveButtonLaF { new WaveSelectionButtonLaF(WaveForms::sin) };
+    std::unique_ptr<WaveSelectionButtonLaF> squareWaveButtonLaF { new WaveSelectionButtonLaF(WaveForms::square) };
+    std::unique_ptr<WaveSelectionButtonLaF> sawtoothWaveButtonLaF { new WaveSelectionButtonLaF(WaveForms::sawtooth) };
+    std::unique_ptr<WaveSelectionButtonLaF> triangleWaveButtonLaF { new WaveSelectionButtonLaF(WaveForms::triangle) };
+
     ADSRVisualiserComponent adsrVisualiserComponent;
     
     juce::Button* currentSelection = nullptr;

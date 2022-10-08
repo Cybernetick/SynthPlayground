@@ -18,6 +18,7 @@ using SliderAttachement = juce::AudioProcessorValueTreeState::SliderAttachment;
 class ADSRVisualizerSlider: public juce::Slider
 {
     std::unique_ptr<SliderAttachement> sliderAttachment;
+    std::unique_ptr<ADSRVisualizerSliderLaF> lookAndFeel { new ADSRVisualizerSliderLaF() };
 public:
     ADSRVisualizerSlider();
     

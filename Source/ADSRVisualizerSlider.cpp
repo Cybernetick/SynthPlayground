@@ -15,7 +15,7 @@ ADSRVisualizerSlider::ADSRVisualizerSlider()
     setColour(juce::Slider::trackColourId, juce::Colours::green);
     setColour(juce::Slider::thumbColourId, juce::Colours::aquamarine);
     setSliderSnapsToMousePosition(false);
-    setLookAndFeel(new ADSRVisualizerSliderLaF());
+    setLookAndFeel(lookAndFeel.get());
     setSliderStyle(SliderStyle::LinearVertical);
     setRange(0.1, 5.0);
 }
