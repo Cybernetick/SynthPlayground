@@ -15,24 +15,20 @@ MainLayoutDrawer::MainLayoutDrawer(int numChannels): audioVisualiserComponent(nu
     audioVisualiserComponent.setRepaintRate(24);
     audioVisualiserComponent.setSamplesPerBlock(16);
     components.insert(components.begin(), &audioVisualiserComponent);
+
+    sinWaveButton.setLookAndFeel(sinWaveButtonLaF.get());
+    sinWaveButton.addListener(this);
+    squareWaveButton.setLookAndFeel(squareWaveButtonLaF.get());
+    squareWaveButton.addListener(this);
+    sawToothWaveButton.setLookAndFeel(sawtoothWaveButtonLaF.get());
+    sawToothWaveButton.addListener(this);
+    triangleWaveButton.setLookAndFeel(triangleWaveButtonLaF.get());
+    triangleWaveButton.addListener(this);
     
-    auto sinWaveButton = new juce::ToggleButton();
-    sinWaveButton->setLookAndFeel(sinWaveButtonLaF.get());
-    sinWaveButton->addListener(this);
-    auto squareWaveButton = new juce::ToggleButton();
-    squareWaveButton->setLookAndFeel(squareWaveButtonLaF.get());
-    squareWaveButton->addListener(this);
-    auto sawToothWaveButton = new juce::ToggleButton();
-    sawToothWaveButton->setLookAndFeel(sawtoothWaveButtonLaF.get());
-    sawToothWaveButton->addListener(this);
-    auto triangleWaveButton = new juce::ToggleButton();
-    triangleWaveButton->setLookAndFeel(triangleWaveButtonLaF.get());
-    triangleWaveButton->addListener(this);
-    
-    components.insert(components.end(), sinWaveButton);
-    components.insert(components.end(), squareWaveButton);
-    components.insert(components.end(), sawToothWaveButton);
-    components.insert(components.end(), triangleWaveButton);
+    components.insert(components.end(), &sinWaveButton);
+    components.insert(components.end(), &squareWaveButton);
+    components.insert(components.end(), &sawToothWaveButton);
+    components.insert(components.end(), &triangleWaveButton);
     components.insert(components.end(), &adsrVisualiserComponent);
 }
 
@@ -77,26 +73,11 @@ void MainLayoutDrawer::drawWaveform(juce::Graphics &graphicContext, juce::Rectan
     audioVisualiserComponent.paintChannel(graphicContext, drawingRect, new juce::Range<float>(-1.0, 1.0), 2, 16);
 }
 
-void MainLayoutDrawer::drawWaveSelectionContainer(juce::Graphics &graphicContext)
-{
-//    sinWaveButton.setBounds(10, 10, 40, 40);
-//    squareWaveButton.setBounds(50, 10, 40, 40);
-//    sawToothWaveButton.setBounds(90, 10, 40, 40);
-//    triangleWaveButton.setBounds(130, 10, 40, 40);
-    for (Component* component : components) {
-        auto laf = dynamic_cast<WaveSelectionButtonLaF*>(&component->getLookAndFeel());
-        if (laf) {
-            if (laf->waveform == WaveForms::sin) {
-                component->setBounds(10, 10, 40, 40);
-            } else if (laf->waveform == WaveForms::square) {
-                component->setBounds(50, 10, 40, 40);
-            } else if (laf->waveform == WaveForms::sawtooth) {
-                component->setBounds(90, 10, 40, 40);
-            } else if (laf->waveform == WaveForms::triangle) {
-                component->setBounds(130, 10, 40, 40);
-            }
-        }
-    }
+void MainLayoutDrawer::drawWaveSelectionContainer(juce::Graphics &graphicContext) {
+    sinWaveButton.setBounds(10, 10, 40, 40);
+    squareWaveButton.setBounds(50, 10, 40, 40);
+    sawToothWaveButton.setBounds(90, 10, 40, 40);
+    triangleWaveButton.setBounds(130, 10, 40, 40);
 }
 
 void MainLayoutDrawer::buttonClicked(juce::Button *clickedButton)
@@ -119,6 +100,7 @@ void MainLayoutDrawer::buttonClicked(juce::Button *clickedButton)
 
 void MainLayoutDrawer::clean()
 {
+    adsrVisualiserComponent.clean();
     components.clear();
     uiEventsListener = nullptr;
 }

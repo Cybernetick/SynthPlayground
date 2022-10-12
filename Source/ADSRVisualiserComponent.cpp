@@ -66,8 +66,10 @@ void ADSRVisualiserComponent::drawVisualizerPath(Graphics& graphics)
 }
 
 void ADSRVisualiserComponent::clean() {
-    for (Component* child: getChildren()) {
-    }
+    attack_slider.setLookAndFeel(nullptr);
+    decay_slider.setLookAndFeel(nullptr);
+    sustain_slider.setLookAndFeel(nullptr);
+    release_slider.setLookAndFeel(nullptr);
 }
 
 void ADSRVisualiserComponent::attachAPVTS(juce::AudioProcessorValueTreeState& apvts)

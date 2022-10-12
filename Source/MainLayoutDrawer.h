@@ -27,21 +27,21 @@ private:
     int width { 0 };
     int height { 0 };
     
-    std::vector<juce::Component*> components;
-    
     juce::AudioVisualiserComponent audioVisualiserComponent;
-//    ToggleButton sinWaveButton;
-//    ToggleButton squareWaveButton;
-//    ToggleButton sawToothWaveButton;
-//    ToggleButton triangleWaveButton;
-
     std::unique_ptr<WaveSelectionButtonLaF> sinWaveButtonLaF { new WaveSelectionButtonLaF(WaveForms::sin) };
     std::unique_ptr<WaveSelectionButtonLaF> squareWaveButtonLaF { new WaveSelectionButtonLaF(WaveForms::square) };
     std::unique_ptr<WaveSelectionButtonLaF> sawtoothWaveButtonLaF { new WaveSelectionButtonLaF(WaveForms::sawtooth) };
     std::unique_ptr<WaveSelectionButtonLaF> triangleWaveButtonLaF { new WaveSelectionButtonLaF(WaveForms::triangle) };
 
+    ToggleButton sinWaveButton;
+    ToggleButton squareWaveButton;
+    ToggleButton sawToothWaveButton;
+    ToggleButton triangleWaveButton;
+
     ADSRVisualiserComponent adsrVisualiserComponent;
-    
+
+    std::vector<juce::Component*> components;
+
     juce::Button* currentSelection = nullptr;
     GUI::UIEventsListener* uiEventsListener = nullptr;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainLayoutDrawer)

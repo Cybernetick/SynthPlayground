@@ -21,7 +21,9 @@ class ADSRVisualizerSlider: public juce::Slider
     std::unique_ptr<ADSRVisualizerSliderLaF> lookAndFeel { new ADSRVisualizerSliderLaF() };
 public:
     ADSRVisualizerSlider();
-    
+
+    ~ADSRVisualizerSlider() override;
+
     void mouseEnter(const juce::MouseEvent& event) override;
     void mouseExit(const juce::MouseEvent& event) override;
     
