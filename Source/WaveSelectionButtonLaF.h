@@ -43,10 +43,10 @@ public:
             shadow.colour = Colours::dimgrey;
             if (shouldDrawButtonAsDown || button.getToggleState())
             {
-                shadow.radius = inset / 3;
+                shadow.radius = static_cast<int>(inset / 3);
             } else
             {
-                shadow.radius = inset / 2;
+                shadow.radius = static_cast<int>(inset / 2);
             }
             
             shadow.drawForRectangle(graphics, button.getLocalBounds().reduced(shadow.radius, shadow.radius));

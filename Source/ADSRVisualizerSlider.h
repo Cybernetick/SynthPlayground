@@ -22,8 +22,6 @@ class ADSRVisualizerSlider: public juce::Slider
 public:
     ADSRVisualizerSlider();
 
-    ~ADSRVisualizerSlider() override;
-
     void mouseEnter(const juce::MouseEvent& event) override;
     void mouseExit(const juce::MouseEvent& event) override;
     

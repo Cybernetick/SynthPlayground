@@ -64,7 +64,7 @@ void OscVoice::updateWaveForm(WaveForms waveform)
     osc.reset();
     switch (waveform) {
         case WaveForms::sin:
-            osc.initialise([] (float x ) {return sin(x); });
+            osc.initialise([] (float x ) { return sin(x);});
             break;
         case WaveForms::square:
             osc.initialise([] (float x ) { return x < 0.0f ? -1.0f : 1.0f; });
@@ -73,7 +73,11 @@ void OscVoice::updateWaveForm(WaveForms waveform)
             osc.initialise([] (float x ) { return x / juce::MathConstants<float>::pi; });
             break;
         case WaveForms::triangle:
-            
+            osc.initialise([] (float x){
+                x += MathConstants<float>::halfPi;
+                float result = fabs( x / MathConstants<float>::twoPi - .5f) * 4 - 1;
+                return result;
+            });
             break;
         default:
             break;
@@ -85,6 +89,7 @@ void OscVoice::initFilters(double sampleRate, int samplesPerBlock, int numChanne
     initAdsrSpec(sampleRate);
     initOscilliatorSpec(sampleRate, samplesPerBlock, numChannels);
 }
+
 
 void OscVoice::updateAdsrParameters(float attack, float decay, float sustain, float release)
 {
