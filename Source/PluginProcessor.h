@@ -18,7 +18,7 @@
 using APVTS = juce::AudioProcessorValueTreeState;
 using APVTS_Parameters = juce::AudioProcessorValueTreeState::ParameterLayout;
 
-class NewProjectAudioProcessor  : public juce::AudioProcessor
+class NewProjectAudioProcessor  : public juce::AudioProcessor, private juce::MidiInputCallback
 {
 public:
     //==============================================================================
@@ -59,7 +59,9 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     juce::AudioBuffer<float>& getLatestAudioBlock();
     void updateWaveForm(WaveForms waveform);
-    
+    juce::StringArray getAvailableMidiDevicesNames();
+    void setActiveMidiDeviceId(int deviceIndex);
+
     APVTS apvts;
 private:
     //==============================================================================
@@ -67,5 +69,9 @@ private:
     
     juce::Synthesiser mySynthesiser;
     juce::AudioBuffer<float> latestBlock { juce::AudioBuffer<float>() };
+    juce::AudioDeviceManager mAudioDeviceManager;
+    String mSelectedMidiDeviceIdentifier;
     APVTS_Parameters createApvtsParameters();
+
+    void handleIncomingMidiMessage(juce::MidiInput *source, const juce::MidiMessage &message) override;
 };

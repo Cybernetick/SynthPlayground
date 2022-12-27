@@ -30,10 +30,12 @@ MainLayoutDrawer::MainLayoutDrawer(int numChannels) : audioVisualiserComponent(n
     components.insert(components.end(), &sawToothWaveButton);
     components.insert(components.end(), &triangleWaveButton);
     components.insert(components.end(), &adsrVisualiserComponent);
+    components.insert(components.end(), &mMidiInputSelector);
 }
 
 void MainLayoutDrawer::redrawLayout(juce::Graphics &graphic) {
     drawBackground(graphic);
+    drawMidiSelector();
     drawWaveSelectionContainer(graphic);
     drawWaveformContainer(graphic);
     drawADSRComponent(graphic);
@@ -97,5 +99,19 @@ void MainLayoutDrawer::clean() {
 }
 
 void MainLayoutDrawer::drawADSRComponent(juce::Graphics &graphicContext) {
-    adsrVisualiserComponent.setBounds(200, 10, 200, 100);
+    adsrVisualiserComponent.setBounds(200, 40, 200, 100);
+}
+
+void MainLayoutDrawer::drawMidiSelector() {
+    mMidiInputSelector.setBounds(200, 10, 200, 30);
+}
+
+void MainLayoutDrawer::appendMidiDevicesList(const juce::StringArray& names, GUI::UIEventsListener& listener) {
+    mMidiInputSelector.addItemList(names, 1);
+    mMidiInputSelector.setSelectedId(mSelectedMidiInputId, juce::NotificationType::dontSendNotification);
+    mMidiInputSelector.onChange = [this, &listener]{
+        mSelectedMidiInputId = mMidiInputSelector.getSelectedId();
+        listener.onMidiDeviceSelected(mSelectedMidiInputId);
+        mMidiInputSelector.setSelectedId(mSelectedMidiInputId, juce::NotificationType::dontSendNotification);
+    };
 }

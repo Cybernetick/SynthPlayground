@@ -22,6 +22,7 @@ private:
     void drawWaveformContainer(juce::Graphics& graphicContext);
     void drawWaveform(juce::Graphics& graphicContext, juce::Rectangle<float> drawingRect);
     void drawADSRComponent(juce::Graphics& graphicContext);
+    void drawMidiSelector();
     void buttonClicked(juce::Button* clickedButton) override;
     
     int width { 0 };
@@ -40,6 +41,8 @@ private:
     ToggleButton triangleWaveButton;
 
     ADSRVisualiserComponent adsrVisualiserComponent;
+    juce::ComboBox mMidiInputSelector;
+    int mSelectedMidiInputId = 1;
 
     std::vector<juce::Component*> components;
 
@@ -53,7 +56,8 @@ public:
     void onWindowResized(int newWidth, int newHeight);
     void pushBufferForVisualisation(juce::AudioBuffer<float>& buffer);
     void clean();
-    
+    void appendMidiDevicesList(const juce::StringArray& names, GUI::UIEventsListener& listener);
+
     void setUIEventsListener(GUI::UIEventsListener* listener)
     {
         uiEventsListener = listener;

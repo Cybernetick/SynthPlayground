@@ -15,5 +15,6 @@ namespace GUI {
     public:
         virtual void onWaveFormSelected(WaveForms form) = 0;
         virtual ~UIEventsListener() = default;
+        virtual void onMidiDeviceSelected(int midiDeviceId) = 0;
     };
 }

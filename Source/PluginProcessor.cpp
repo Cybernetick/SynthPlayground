@@ -226,3 +226,29 @@ APVTS_Parameters NewProjectAudioProcessor::createApvtsParameters()
     layout.add(std::make_unique<AudioParameterFloat>(Parameters::Ids::envelope_release, Parameters::Names::envelope_release, 0.0f, 5.0f, 0.1f));
     return layout;
 }
+
+void NewProjectAudioProcessor::handleIncomingMidiMessage(juce::MidiInput *source, const MidiMessage &message) {
+    std::cout << "input from " << source->getName() << ", message: " << message.getDescription();
+}
+
+juce::StringArray NewProjectAudioProcessor::getAvailableMidiDevicesNames() {
+    auto devices = juce::MidiInput::getAvailableDevices();
+    juce::StringArray names;
+    names.add("On-Screen keyboard");
+    for (const auto& device : devices) {
+        names.add(device.name);
+    }
+    return names;
+}
+
+void NewProjectAudioProcessor::setActiveMidiDeviceId(int deviceIndex) {
+    auto deviceList = juce::MidiInput::getAvailableDevices();
+    if (mSelectedMidiDeviceIdentifier.isNotEmpty()){
+        mAudioDeviceManager.removeMidiInputDeviceCallback(mSelectedMidiDeviceIdentifier, this);
+    }
+    mSelectedMidiDeviceIdentifier = deviceList[deviceIndex].identifier;
+    if (!mAudioDeviceManager.isMidiInputDeviceEnabled(mSelectedMidiDeviceIdentifier)) {
+        mAudioDeviceManager.setMidiInputDeviceEnabled(mSelectedMidiDeviceIdentifier, true);
+    }
+    mAudioDeviceManager.addMidiInputDeviceCallback(mSelectedMidiDeviceIdentifier, this);
+}

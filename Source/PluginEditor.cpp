@@ -29,6 +29,7 @@ NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor (NewProjectAudioP
     }
     startTimerHz(60);
     audioProcessor.apvts.addParameterListener(Parameters::Names::envelope_attack, drawingDelegate.getAudioParametersListener());
+    drawingDelegate.appendMidiDevicesList(audioProcessor.getAvailableMidiDevicesNames(), *this);
 }
 
 NewProjectAudioProcessorEditor::~NewProjectAudioProcessorEditor()
@@ -58,4 +59,8 @@ void NewProjectAudioProcessorEditor::onWaveFormSelected(WaveForms form)
 {
     std::cout << "notified waveform change" << std::endl;
     audioProcessor.updateWaveForm(form);
+}
+
+void NewProjectAudioProcessorEditor::onMidiDeviceSelected(int midiDeviceId) {
+    std::cout << "selected midi: "<< midiDeviceId;
 }
