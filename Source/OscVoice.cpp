@@ -74,9 +74,7 @@ void OscVoice::updateWaveForm(WaveForms waveform)
             break;
         case WaveForms::triangle:
             osc.initialise([] (float x){
-                x += MathConstants<float>::halfPi;
-                float result = fabs( x / MathConstants<float>::twoPi - .5f) * 4 - 1;
-                return result;
+                return (fabs(x / MathConstants<float>::pi) * -1) + 0.5f;
             });
             break;
         default:
