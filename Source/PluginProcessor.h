@@ -59,6 +59,7 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     juce::AudioBuffer<float>& getLatestAudioBlock();
     void updateWaveForm(WaveForms waveform);
+    WaveForms getCurrentSelectedWaveform();
     juce::StringArray getAvailableMidiDevicesNames();
     void setActiveMidiDeviceId(int deviceIndex);
 
@@ -66,12 +67,13 @@ public:
 private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (NewProjectAudioProcessor)
-    
+
     juce::Synthesiser mySynthesiser;
     juce::AudioBuffer<float> latestBlock { juce::AudioBuffer<float>() };
     juce::AudioDeviceManager mAudioDeviceManager;
     String mSelectedMidiDeviceIdentifier;
-    APVTS_Parameters createApvtsParameters();
+    WaveForms mSelectedWaveform { WaveForms::sin };
+    static APVTS_Parameters createApvtsParameters();
 
     void handleIncomingMidiMessage(juce::MidiInput *source, const juce::MidiMessage &message) override;
 };

@@ -28,8 +28,10 @@ NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor (NewProjectAudioP
         }
     }
     startTimerHz(60);
-    audioProcessor.apvts.addParameterListener(Parameters::Names::envelope_attack, drawingDelegate.getAudioParametersListener());
+
+    audioProcessor.apvts.addParameterListener(Parameters::Ids::envelope_attack, drawingDelegate.getAudioParametersListener());
     drawingDelegate.appendMidiDevicesList(audioProcessor.getAvailableMidiDevicesNames(), *this);
+    drawingDelegate.setWaveformButtonSelected(audioProcessor.getCurrentSelectedWaveform());
 }
 
 NewProjectAudioProcessorEditor::~NewProjectAudioProcessorEditor()

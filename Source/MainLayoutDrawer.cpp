@@ -115,3 +115,25 @@ void MainLayoutDrawer::appendMidiDevicesList(const juce::StringArray& names, GUI
         mMidiInputSelector.setSelectedId(mSelectedMidiInputId, juce::NotificationType::dontSendNotification);
     };
 }
+
+void MainLayoutDrawer::setWaveformButtonSelected(WaveForms selectedWaveform) {
+    auto current = dynamic_cast<juce::ToggleButton *>(currentSelection);
+    if (current) {
+        current->setToggleState(false, juce::NotificationType::dontSendNotification);
+    }
+    switch (selectedWaveform) {
+        case WaveForms::sin:
+            currentSelection = &sinWaveButton;
+            break;
+        case WaveForms::square:
+            currentSelection = &squareWaveButton;
+            break;
+        case WaveForms::triangle:
+            currentSelection = &triangleWaveButton;
+            break;
+        case WaveForms::sawtooth:
+            currentSelection = &sawToothWaveButton;
+            break;
+    }
+    currentSelection->setToggleState(true, juce::NotificationType::dontSendNotification);
+}

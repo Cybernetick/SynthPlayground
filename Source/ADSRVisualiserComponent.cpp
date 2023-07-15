@@ -25,7 +25,7 @@ ADSRVisualiserComponent::ADSRVisualiserComponent()
 
 void ADSRVisualiserComponent::parameterChanged(const String &parameterID, float newValue)
 {
-    std::cout << "parameter " << parameterID << " changed to " << newValue;
+    std::cout << "parameter " << parameterID << " changed to " << newValue << std::endl;
 }
 
 void ADSRVisualiserComponent::resized()

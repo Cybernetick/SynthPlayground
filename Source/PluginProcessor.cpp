@@ -98,6 +98,7 @@ void NewProjectAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     for (int i = 0; i < 1; i++) {
         auto voice = new OscVoice();
         voice->initFilters(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
+        voice->updateWaveForm(mSelectedWaveform);
         mySynthesiser.addVoice(voice);
     }
     mySynthesiser.addSound(new OscSound());
@@ -183,15 +184,22 @@ juce::AudioProcessorEditor* NewProjectAudioProcessor::createEditor()
 //==============================================================================
 void NewProjectAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
-    // You should use this method to store your parameters in the memory block.
-    // You could do that either as raw data, or use the XML or ValueTree classes
-    // as intermediaries to make it easy to save and load complex data.
+    auto state = apvts.copyState();
+    std::unique_ptr<juce::XmlElement> xml (state.createXml());
+    xml -> setAttribute("waveForm", static_cast<int>(mSelectedWaveform));
+    copyXmlToBinary(*xml, destData);
 }
 
 void NewProjectAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    // You should use this method to restore your parameters from this memory block,
-    // whose contents will have been created by the getStateInformation() call.
+    std::unique_ptr<juce::XmlElement> xml (getXmlFromBinary(data, sizeInBytes));
+    if (xml != nullptr) {
+        if (xml->hasTagName(apvts.state.getType())) {
+            apvts.replaceState(ValueTree::fromXml(*xml));
+        }
+    }
+    mSelectedWaveform = static_cast<WaveForms>(xml->getIntAttribute("waveForm", -999));
+    updateWaveForm(mSelectedWaveform);
 }
 
 //==============================================================================
@@ -208,6 +216,7 @@ juce::AudioBuffer<float>& NewProjectAudioProcessor::getLatestAudioBlock()
 
 void NewProjectAudioProcessor::updateWaveForm(WaveForms waveform)
 {
+    mSelectedWaveform = waveform;
     for (int i = 0; i < mySynthesiser.getNumVoices(); ++i)
     {
         auto voice = dynamic_cast<OscVoice*>(mySynthesiser.getVoice(i));
@@ -252,4 +261,8 @@ void NewProjectAudioProcessor::setActiveMidiDeviceId(int deviceIndex) {
         mAudioDeviceManager.setMidiInputDeviceEnabled(mSelectedMidiDeviceIdentifier, true);
     }
     mAudioDeviceManager.addMidiInputDeviceCallback(mSelectedMidiDeviceIdentifier, this);
+}
+
+WaveForms NewProjectAudioProcessor::getCurrentSelectedWaveform() {
+    return mSelectedWaveform;
 }

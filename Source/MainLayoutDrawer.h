@@ -63,7 +63,7 @@ public:
         uiEventsListener = listener;
     }
     
-    const std::vector<juce::Component*> getComponents()
+    std::vector<juce::Component*> getComponents()
     {
         return components;
     }
@@ -72,4 +72,6 @@ public:
     {
         return dynamic_cast<ADSRVisualiserComponent*>(&adsrVisualiserComponent);
     }
+
+    void setWaveformButtonSelected(WaveForms selectedWaveform);
 };
