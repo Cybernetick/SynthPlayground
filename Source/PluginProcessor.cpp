@@ -149,7 +149,8 @@ void NewProjectAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     {
         auto voice = dynamic_cast<OscVoice*>(mySynthesiser.getVoice(i));
         if (voice) {
-            voice->updateAdsrParameters(attackParam->load(), decayParam->load(), sustainParam->load(), releaseParam->load());
+            voice->updateADSRParameters(attackParam->load(), decayParam->load(), sustainParam->load(),
+                                        releaseParam->load());
         }
         
     }

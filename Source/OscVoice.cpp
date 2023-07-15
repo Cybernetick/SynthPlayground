@@ -84,12 +84,12 @@ void OscVoice::updateWaveForm(WaveForms waveform)
 
 void OscVoice::initFilters(double sampleRate, int samplesPerBlock, int numChannels)
 {
-    initAdsrSpec(sampleRate);
-    initOscilliatorSpec(sampleRate, samplesPerBlock, numChannels);
+    initADSRSpec(sampleRate);
+    initOscillatorSpec(sampleRate, samplesPerBlock, numChannels);
 }
 
 
-void OscVoice::updateAdsrParameters(float attack, float decay, float sustain, float release)
+void OscVoice::updateADSRParameters(float attack, float decay, float sustain, float release)
 {
     adsrParameters.attack = attack;
     adsrParameters.decay = decay;
@@ -97,3 +97,8 @@ void OscVoice::updateAdsrParameters(float attack, float decay, float sustain, fl
     adsrParameters.release = release;
     adsr.setParameters(adsrParameters);
 }
+
+float OscVoice::SawSample(float phase) {
+    float output = 0.0f;
+    double nyquistLimit = getSampleRate() / 2.0;
+};

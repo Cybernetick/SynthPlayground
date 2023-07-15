@@ -24,16 +24,14 @@ public:
     void renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples) override;
     void initFilters(double sampleRate, int samplesPerBlock, int numChannels);
     void updateWaveForm(WaveForms waveform);
-    void updateAdsrParameters(float attack, float decay, float sustain, float release);
+    void updateADSRParameters(float attack, float decay, float sustain, float release);
 private:
     juce::dsp::Oscillator<float> osc {};
     juce::AudioBuffer<float> voiceBuffer;
     juce::ADSR adsr {};
     juce::ADSR::Parameters adsrParameters {};
     
-    double tailOff { 0.0 };
-    
-    void initOscilliatorSpec(double sampleRate, int samplesPerBlock, int numChannels)
+    void initOscillatorSpec(double sampleRate, int samplesPerBlock, int numChannels)
     {
         juce::dsp::ProcessSpec spec;
         spec.maximumBlockSize = samplesPerBlock;
@@ -43,8 +41,10 @@ private:
         osc.prepare(spec);
     }
     
-    void initAdsrSpec(double sampleRate)
+    void initADSRSpec(double sampleRate)
     {
         adsr.setSampleRate(sampleRate);
     }
+
+    float SawSample(float phase);
 };
